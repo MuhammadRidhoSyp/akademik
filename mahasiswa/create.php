@@ -5,11 +5,11 @@
 <body>
     <div class="container-sm py-4 px-5">
         <h3>Form Input Data Mahasiswa</h3>
-        <form action="proses.php" method="post" class="my-5">
+        <form action="mahasiswa/proses.php" method="post" class="my-5">
             
             <div class="mb-3">
                 <label class="form-label">NIM</label>
-                <input name="nim" type="number" class="form-control" placeholder="Masukkan NIM (Nomor Induk Mahasiswa)" required>
+                <input name="nim" type="text" class="form-control" placeholder="Masukkan NIM (Nomor Induk Mahasiswa)" required>
             </div>
 
             <div class="mb-3">
@@ -20,6 +20,20 @@
             <div class="mb-3">
                 <label class="form-label">Tanggal Lahir</label>
                 <input name="tgl_lahir" type="date" class="form-control" required>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Prodi</label>
+                <?php
+                    require __DIR__ . '/../koneksi.php';
+                    $prodi_list = $koneksi->query("SELECT * FROM prodi ORDER BY nama_prodi");
+                ?>
+                <select name="prodi_id" class="form-select" required>
+                    <option value="">-- Pilih Prodi --</option>
+                    <?php while($row = mysqli_fetch_assoc($prodi_list)) { ?>
+                        <option value="<?= $row['id'] ?>"><?= $row['nama_prodi'] ?> (<?= $row['jenjang'] ?>)</option>
+                    <?php } ?>
+                </select>
             </div>
 
             <div class="mb-3">
