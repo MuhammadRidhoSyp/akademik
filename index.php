@@ -1,3 +1,18 @@
+<?php
+
+// session | cookies
+session_start();
+
+//cek login sudah ada atau belum
+if(!isset($_SESSION['login'])) {
+    header('location: login.php');
+    exit;
+      
+}
+?>
+
+
+
 <html>
 <head>
     <title>Sistem Akademik</title>
